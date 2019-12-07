@@ -17,7 +17,8 @@ const Form = props => {
   const [editFormData, setEditFormData] = useState({
     name: editingFriend.name,
     age: editingFriend.age,
-    email: editingFriend.email
+    email: editingFriend.email,
+    id: editingFriend.id
   });
 
   //post new friend
@@ -41,6 +42,8 @@ const Form = props => {
   const handleEditSubmit = e => {
     e.preventDefault();
     editFriend(editingFriend.id, { ...editFormData, id: editingFriend.id });
+    console.log(editingFriend);
+    console.log(editFormData);
     setEditFormData({ name: "", age: "", email: "" });
     setEditingFriend({ name: "", age: "", email: "", id: "" });
     setIsEditing(false);

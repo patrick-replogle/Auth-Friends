@@ -13,6 +13,7 @@ const FriendsContextProvider = ({ children }) => {
     email: ""
   });
 
+  //get friendslist
   useEffect(() => {
     setIsLoading(true);
     axiosWithAuth()
@@ -24,6 +25,7 @@ const FriendsContextProvider = ({ children }) => {
       .catch(err => console.log(err));
   }, []);
 
+  //add friend
   const addFriend = friend => {
     axiosWithAuth()
       .post("/friends", friend)
@@ -33,6 +35,7 @@ const FriendsContextProvider = ({ children }) => {
       .catch(err => console.log(err));
   };
 
+  //delete friend
   const deleteFriend = friendId => {
     axiosWithAuth()
       .delete(`/friends/${friendId}`)
@@ -42,6 +45,7 @@ const FriendsContextProvider = ({ children }) => {
       .catch(err => console.log(err));
   };
 
+  //edit friend
   const editFriend = (friendId, friend) => {
     axiosWithAuth()
       .put(`/friends/${friendId}`, friend)
