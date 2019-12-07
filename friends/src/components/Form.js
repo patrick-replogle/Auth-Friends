@@ -9,7 +9,8 @@ const Form = props => {
     isEditing,
     setIsEditing,
     editingFriend,
-    setEditingFriend
+    setEditingFriend,
+    friendsList
   } = useContext(friendsContext);
 
   const [formData, setFormData] = useState({ name: "", age: "", email: "" });
@@ -47,7 +48,7 @@ const Form = props => {
 
   return (
     <>
-      <h3>Add a Friend</h3>
+      <h3>{`You have ${friendsList.length} friends. Add another below: `}</h3>
       {isEditing ? (
         <>
           <form onSubmit={handleEditSubmit}>

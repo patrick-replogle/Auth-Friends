@@ -21,9 +21,6 @@ const FriendsList = props => {
         </div>
       ) : (
         <>
-          <div className="friendLength">
-            <p>{`You have ${friendsList.length} friends!`}</p>
-          </div>
           <div className="friendsListContainer">
             {friendsList.length < 1 && <h2>Go Socialize!</h2>}
             {friendsList.map(friend => (
