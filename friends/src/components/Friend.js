@@ -3,24 +3,16 @@ import React, { useContext } from "react";
 import { friendsContext } from "../contexts/friendsContext";
 
 const Friend = props => {
-  const {
-    deleteFriend,
-    editingFriend,
-    setEditingFriend,
-    setIsEditing
-  } = useContext(friendsContext);
+  const { deleteFriend, setEditingFriend, setIsEditing } = useContext(
+    friendsContext
+  );
 
   const handleEditToggle = e => {
     e.preventDefault();
-    setEditingFriend({
-      name: props.friend.name,
-      age: props.friend.age,
-      email: props.friend.email,
-      id: props.friend.id
-    });
+    setEditingFriend(props.friend);
     setIsEditing(true);
-    console.log(editingFriend);
   };
+
   return (
     <div className="friendCard">
       <p>Name: {props.friend.name}</p>
