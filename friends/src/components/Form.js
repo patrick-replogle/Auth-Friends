@@ -9,12 +9,12 @@ const Form = () => {
     isEditing,
     setIsEditing,
     editingFriend,
-    setEditingFriend,
     friendsList
   } = useContext(friendsContext);
 
   const [formData, setFormData] = useState({ name: "", age: "", email: "" });
 
+  //useEffect helps render/populate the form with the editingFriend if isEditing is true
   useEffect(() => {
     if (isEditing) {
       setFormData({
@@ -23,34 +23,29 @@ const Form = () => {
         email: editingFriend.email
       });
     }
-  }, [isEditing]);
+  }, [isEditing, editingFriend.age, editingFriend.email, editingFriend.name]);
 
-  //post new friend
   const handleChange = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  //post new friend
+  //handlesubmit now works for both editing and posting
   const handleSubmit = e => {
     e.preventDefault();
-    addFriend({ ...formData, id: Date.now() });
+    if (isEditing) {
+      editFriend(editingFriend.id, { ...formData, id: Date.now() });
+      setIsEditing(false);
+    } else {
+      addFriend({ ...formData, id: Date.now() });
+    }
     setFormData({ name: "", age: "", email: "" });
-  };
-
-  //edit friend
-  const handleEditSubmit = e => {
-    e.preventDefault();
-    editFriend(editingFriend.id, { ...formData, id: Date.now() });
-    setFormData({ name: "", age: "", email: "" });
-    setEditingFriend({ name: "", age: "", email: "", id: "" });
-    setIsEditing(false);
   };
 
   return (
     <>
       <h3>{`You have ${friendsList.length} friends. Add another below: `}</h3>
       <>
-        <form onSubmit={isEditing ? handleEditSubmit : handleSubmit}>
+        <form onSubmit={handleSubmit}>
           <input
             onChange={handleChange}
             type="text"
